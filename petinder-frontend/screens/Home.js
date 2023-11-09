@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, StyleSheet, View, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const FormHomeInfo = () => {
+const Home = () => {
     const navigation = useNavigation();
 
     return (
@@ -10,14 +10,14 @@ const FormHomeInfo = () => {
             <Text>Bienvenido a Petinder</Text>
             <Button
                 title="Registrate"
-                onPress={() => navigation.navigate('FormPersonalInfo')}
+                onPress={() => navigation.navigate('FormHomeInfo')}
             />
             
         </View>
     );
 };
 
-export default FormHomeInfo;
+export default Home;
 
 const styles = StyleSheet.create({
   container: {
