@@ -10,9 +10,11 @@ const Home = () => {
             <Text>Bienvenido a Petinder</Text>
             <Button
                 title="Registrate"
-                onPress={() => navigation.navigate('FormHomeInfo')}
+                onPress={() => navigation.navigate('FormPersonalInfo')}
             />
-            
+            <Button
+                title="Registrate con google"
+            />
         </View>
     );
 };
