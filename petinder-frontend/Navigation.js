@@ -11,33 +11,33 @@ import SuccessfulRegistration from "./screens/SuccessfulRegistration";
 const HomeStackNavigator = createNativeStackNavigator();
 
 function MyStack() {
-    return (
-        <HomeStackNavigator.Navigator
-            initialRouteName="Home"
-            screenOptions={{
-                headerShown: false,
-            }}
-        >
-            <HomeStackNavigator.Screen name="Home" component={Home} />
-            <HomeStackNavigator.Screen name="Login" component={Login} />
-            <HomeStackNavigator.Screen name="FormHomeInfo" component={FormHomeInfo} />
-            <HomeStackNavigator.Screen
-                name="FormPersonalInfo"
-                component={FormPersonalInfo}
-            />
-            <HomeStackNavigator.Screen name="FormPetInfo" component={FormPetInfo} />
-            <HomeStackNavigator.Screen
-                name="SuccessfulRegistration"
-                component={SuccessfulRegistration}
-            />
-        </HomeStackNavigator.Navigator>
-    );
+  return (
+    <HomeStackNavigator.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <HomeStackNavigator.Screen name="Home" component={Home} />
+      <HomeStackNavigator.Screen name="Login" component={Login} />
+      <HomeStackNavigator.Screen name="FormHomeInfo" component={FormHomeInfo} />
+      <HomeStackNavigator.Screen
+        name="FormPersonalInfo"
+        component={FormPersonalInfo}
+      />
+      <HomeStackNavigator.Screen name="FormPetInfo" component={FormPetInfo} />
+      <HomeStackNavigator.Screen
+        name="SuccessfulRegistration"
+        component={SuccessfulRegistration}
+      />
+    </HomeStackNavigator.Navigator>
+  );
 }
 
 export default function Navigation() {
-    return (
-        <NavigationContainer>
-            <MyStack />
-        </NavigationContainer>
-    );
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
 }

@@ -1,10 +1,11 @@
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, ScrollView } from "react-native";
+import Tittle from "../components/Tittle";
 
 export default function Login() {
   return (
-    <View style={styles.container}>
-      <Text>Login</Text>
-    </View>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Tittle tittle={"Valida tu identidad"} />
+    </ScrollView>
   );
 }
 
@@ -13,6 +14,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
 });

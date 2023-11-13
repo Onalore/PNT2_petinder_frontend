@@ -1,31 +1,25 @@
-import React from 'react';
-import { Text, StyleSheet, View, Button } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { Text, StyleSheet, ScrollView } from "react-native";
+import Tittle from "../components/Tittle";
+import Button from "../components/Button";
 
-const Home = () => {
-    const navigation = useNavigation();
-
-    return (
-        <View style={styles.container}>
-            <Text>Bienvenido a Petinder</Text>
-            <Button
-                title="Registrate"
-                onPress={() => navigation.navigate('FormPersonalInfo')}
-            />
-            <Button
-                title="Registrate con google"
-            />
-        </View>
-    );
-};
-
-export default Home;
+export default function Home() {
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Tittle tittle={"Valida tu identidad"} />
+      {/* <Button
+        text={"Registrate"}
+        onPress={() => navigation.navigate("FormHomeInfo")}
+      /> */}
+      <Button text={"Registrate"} />
+    </ScrollView>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
 });
