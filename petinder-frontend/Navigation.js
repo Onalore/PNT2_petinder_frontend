@@ -18,7 +18,7 @@ function MyStack() {
         headerShown: false,
       }}
     >
-      <HomeStackNavigator.Screen name="FormHomeInfo" component={FormHomeInfo} />
+      <HomeStackNavigator.Screen name="Home" component={Home} />
       <HomeStackNavigator.Screen name="Login" component={Login} />
       <HomeStackNavigator.Screen name="FormHomeInfo" component={FormHomeInfo} />
       <HomeStackNavigator.Screen
