@@ -32,7 +32,8 @@ const FormHomeInfo = () => {
                 onChangeText={(text) => setMotivos(text)}
             />
 
-            <Button
+            <Button 
+                style={{ backgroundColor: 'blue' }} 
                 title="Continuar"
                 onPress={() => navigation.navigate('FormPetInfo')}
             />

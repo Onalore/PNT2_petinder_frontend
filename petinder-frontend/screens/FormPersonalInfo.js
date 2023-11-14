@@ -46,6 +46,7 @@ const FormPersonalInfo = () => {
                     value={nombre}
                     onChangeText={(text) => setNombre(text)}
                 />
+
                 <TextInput
                     style={styles.input}
                     placeholder="Apellido"

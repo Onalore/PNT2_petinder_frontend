@@ -1,10 +1,10 @@
 import { Text, StyleSheet, View, ScrollView } from "react-native";
-import Tittle from "../components/Tittle";
+import Title from "../components/Title";
 
 export default function Login() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Tittle tittle={"Valida tu identidad"} />
+      <Title title={"Valida tu identidad"} />
     </ScrollView>
   );
 }
