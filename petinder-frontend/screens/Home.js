@@ -1,5 +1,5 @@
 import { Text, StyleSheet, ScrollView } from "react-native";
-import Tittle from "../components/Tittle";
+import Tittle from "../components/Title";
 import Button from "../components/Button";
 
 export default function Home() {
