@@ -1,5 +1,5 @@
 import { Text, StyleSheet, View, ScrollView } from "react-native";
-import Tittle from "../components/Tittle";
+import Tittle from "../components/Title";
 
 export default function Login() {
   return (
