@@ -8,10 +8,10 @@ export default function Button({ text, onPress }) {
     </TouchableOpacity>
   );
 }
-
+ 
 const styles = StyleSheet.create({
   text: {
-    color: "#FFFFFF",
+    color: "#0AD137",
     fontSize: 15,
   },
   button: {

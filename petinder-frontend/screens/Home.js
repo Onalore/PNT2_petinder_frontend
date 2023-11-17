@@ -1,8 +1,10 @@
 import { Text, StyleSheet, ScrollView } from "react-native";
-import Tittle from "../components/Tittle";
+import Tittle from "../components/Title";
 import Button from "../components/Button";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Home() {
+  const navigation = useNavigation()
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Tittle tittle={"Valida tu identidad"} />
@@ -10,7 +12,9 @@ export default function Home() {
         text={"Registrate"}
         onPress={() => navigation.navigate("FormHomeInfo")}
       /> */}
-      <Button text={"Registrate"} />
+      <Button text={"Registrate"}
+          onPress={() => navigation.navigate("FormHomeInfo")}
+         />
     </ScrollView>
   );
 }
