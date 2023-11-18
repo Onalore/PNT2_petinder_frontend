@@ -9,5 +9,6 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 25,
     fontWeight: "bold",
+    textAlign: "center",
   },
 });
