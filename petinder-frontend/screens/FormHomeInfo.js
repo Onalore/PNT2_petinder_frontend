@@ -96,7 +96,7 @@ const FormHomeInfo = () => {
         }
       />
       <Button
-        text={"Continuar"}
+        text="Continuar"
         onPress={() => navigation.navigate("FormPetInfo")}
       />
     </ScrollView>

@@ -8,6 +8,7 @@ const InputSingleLine = ({ placeholder, value, onChangeText }) => {
       style={styles.input}
       placeholder={placeholder}
       value={value}
+      multiline
       onChangeText={onChangeText}
     />
   );

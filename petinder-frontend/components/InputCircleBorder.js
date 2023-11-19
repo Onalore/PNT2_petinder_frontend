@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     borderRadius: 120, // Ajusta el radio de los bordes según tu preferencia
     padding: 10,
     width: "100%",
+    height: "7%",
+    marginBottom: "4%",
+    marginTop: "2%",
   },
 });
 

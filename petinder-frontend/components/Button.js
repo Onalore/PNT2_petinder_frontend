@@ -10,7 +10,7 @@ export default function Button({ text, onPress }) {
     </TouchableOpacity>
   );
 }
- 
+
 const styles = StyleSheet.create({
   text: {
     color: "#FFFFFF",
@@ -23,8 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: appsettings.colors.primary,
     height: 70,
-    width: "90%",
-    margin: 20,
+    width: "100%",
     color: "#FFFFFF",
     borderRadius: 25,
   },
