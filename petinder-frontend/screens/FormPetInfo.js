@@ -34,6 +34,7 @@ export default function FormPetInfo() {
 
             />
             <Card
+                
                 title="¿Qué rol crees que debe ocupar el animal en tu hogar?"
                 placeholder="Ej. Compañía, guardián, etc."
                 value={rol}
