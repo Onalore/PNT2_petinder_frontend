@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+﻿﻿import React, { useState } from "react";
 import { StyleSheet, ScrollView, Text, Image, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Card from "../components/Card";
