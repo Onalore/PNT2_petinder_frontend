@@ -1,6 +1,7 @@
 import { Text, StyleSheet, View, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Button from "../components/Button";
+import appsettings from "../appsettings.json";
 
 export default function SuccessfulRegistration() {
   
@@ -15,7 +16,7 @@ export default function SuccessfulRegistration() {
      <Text style={styles.text}>
         ¡Completaste el registro con éxito!
       </Text>
-      <Button
+      <Button style= {styles.button}
         text="Ir al inicio de sesiòn"
         onPress={() => navigation.navigate("Login")}
     />
@@ -30,24 +31,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     alignItems: "center",
     justifyContent: "flex-start",
-    paddingTop: "20%"
+    paddingTop: "20%",
   },
   imagen: {
     width: 281,
     height: 284,
-    backgroundColor: '#507C5C', 
+    backgroundColor: "#507C5C",
     opacity: 1,
   },
   text: {
-    marginTop: 20,  // Ajusta el margen superior según sea necesario
-    textAlign: 'center',
-    fontSize: 30,
-    lineHeight: 58,
-    fontFamily: 'Roboto-Bold',
-    fontWeight: 'bold',
-    letterSpacing: 0,
-    color: '#507C5C',
-    width: 300,
-    height: 116,
+    fontSize: 16,
+    fontWeight: "bold",
+    color: appsettings.colors.primary,
+  },
+  button: {
+    padding: 10,
+    marginBottom: 20, 
   },
 });
