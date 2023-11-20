@@ -14,7 +14,7 @@ const HomeStackNavigator = createNativeStackNavigator();
 function MyStack() {
     return (
         <HomeStackNavigator.Navigator
-            initialRouteName="FindMatch"
+            initialRouteName="Home"
             screenOptions={{
                 headerShown: false,
             }}

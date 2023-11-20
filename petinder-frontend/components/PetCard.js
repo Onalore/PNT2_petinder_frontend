@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity, PanResponder } from "react-native";
 
-const PetCard = ({ imageUrl, desc, title, logoUrl, onAccept, onReject }) => {
+const PetCard = ({ imageUrl, desc, title, logoUrl, onAccept, onReject, panResponder }) => {
     const [isImageLoaded, setImageLoaded] = useState(false);
 
     const handleImageLoad = () => {
@@ -14,21 +14,24 @@ const PetCard = ({ imageUrl, desc, title, logoUrl, onAccept, onReject }) => {
                 source={imageUrl}
                 style={styles.image}
                 onLoad={handleImageLoad}
+                {...panResponder}
             >
-                <Image source={logoUrl} style={styles.logo} />
-                <View style={styles.textContainer}>
-                    <Text style={styles.title}>{title}</Text>
-                    <Text style={styles.desc}>{desc}</Text>
+                <View style={styles.overlay}>
+                    <Image source={logoUrl} style={styles.logo} />
+                    <View style={styles.textContainer}>
+                        <Text style={styles.title}>{title}</Text>
+                        <Text style={styles.desc}>{desc}</Text>
+                    </View>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.rejectButton} onPress={onReject}>
+                        <Text style={styles.buttonText}>Rechazar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.acceptButton} onPress={onAccept}>
+                        <Text style={styles.buttonText}>Aceptar</Text>
+                    </TouchableOpacity>
                 </View>
             </ImageBackground>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.rejectButton} onPress={onReject}>
-                    <Text style={styles.buttonText}>Rechazar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.acceptButton} onPress={onAccept}>
-                    <Text style={styles.buttonText}>Aceptar</Text>
-                </TouchableOpacity>
-            </View>
         </View>
     );
 };
@@ -37,16 +40,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#ffffff",
-        position: "relative",
+        overflow: "hidden",
     },
     image: {
         width: "100%",
         height: "100%",
         position: "relative",
-        justifyContent: "flex-end", // Ajusta la posición de los elementos dentro de la imagen de fondo
+        justifyContent: "flex-end",
+    },
+    overlay: {
+        backgroundColor: "rgba(0, 0, 0, 0.3)",
+        padding: 16,
     },
     textContainer: {
-        padding: 70,
+        position: "relative",
+        marginBottom: 70,
+        zIndex: 1
     },
     desc: {
         fontSize: 20,
@@ -63,6 +72,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         top: 20,
         left: 20,
+        zIndex: 2
     },
     buttonContainer: {
         flexDirection: "row",
