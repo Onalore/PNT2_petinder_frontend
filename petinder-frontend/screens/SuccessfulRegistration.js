@@ -9,7 +9,7 @@ export default function SuccessfulRegistration() {
   return (
     <View style={styles.container}>      
       <Image
-        source={require("../assets/logo.png")}
+        source={require("../assets/perrito.png")}
         style={styles.imagen}
       />
      <Text style={styles.text}>
