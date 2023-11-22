@@ -22,7 +22,7 @@ const generarTipo = () => {
     return tipos[random(0, tipos.length)];
 }
 
-const generarM2 = () => random(50, 500)
+const generarM2 = () => random(10, 500)
 
 const generarHorasSolo = () => random(0, 24)
 
