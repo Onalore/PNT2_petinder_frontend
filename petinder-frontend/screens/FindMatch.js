@@ -54,11 +54,12 @@ export default function FindMatch() {
 
     return (
       <View style={styles.container}>
-        <BarraNavegacion
-                icon="cards-heart-outline" />
-            <TouchableOpacity style={styles.button} onPress = { volver } >
-                <Text style={styles.buttonText}>Regresar</Text>               
-            </TouchableOpacity>
+            <BarraNavegacion icon="cards-heart-outline" />
+            {currentPetIndex > 0 && (
+                <TouchableOpacity style={styles.button} onPress={volver}>
+                    <Text style={styles.buttonText}>Regresar</Text>
+                </TouchableOpacity>
+            )}
         {currentPetIndex < mascota.length ? (
           <PetCard
             {...mascota[currentPetIndex]}
