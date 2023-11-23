@@ -61,9 +61,7 @@ const FormPersonalInfo = () => {
         fechaNacimiento,
         latitud,
         longitud,
-        telefono,
-        instagram,
-        facebook,
+        telefono
       };
 
       submitFormData();

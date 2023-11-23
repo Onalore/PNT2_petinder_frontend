@@ -43,7 +43,7 @@ export default function FindMatch() {
     },
     onPanResponderRelease: (evt, gestureState) => {
       const { dx } = gestureState;
-      if (dx < 0) {
+      if (dx > 0) {
         // Deslizar hacia la derecha
         handleAccept();
       } else {
