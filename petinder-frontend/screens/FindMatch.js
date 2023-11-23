@@ -10,47 +10,49 @@ import logo from "../assets/logo.png";
 import { TouchableOpacity } from "react-native";
 
 export default function FindMatch() {
-    const navigation = useNavigation();
-    const { mascota } = useContext(MascotaContext);
-    const [currentPetIndex, setCurrentPetIndex] = useState(0);
+  const navigation = useNavigation();
+  const { mascota, addMascotaDeseada } = useContext(MascotaContext);
+  const [currentPetIndex, setCurrentPetIndex] = useState(0);
 
-    const handleAccept = () => {
-        var indice = obtenerIndice(mascota[currentPetIndex]);
-        console.log(indice);
-        if (obtenerIndice(mascota[currentPetIndex]) >= 75) {
-            navigation.navigate("Match", {
-              matchedPet: mascota[currentPetIndex],
-            });
-        }
-        setCurrentPetIndex(currentPetIndex + 1); // Cambia a la siguiente mascota
+  const handleAccept = () => {
+    addMascotaDeseada(mascota[currentPetIndex]);
+    var indice = obtenerIndice(mascota[currentPetIndex]);
+
+    console.log(indice);
+    if (obtenerIndice(mascota[currentPetIndex]) >= 75) {
+      navigation.navigate("Match", {
+        matchedPet: mascota[currentPetIndex],
+      });
+    }
+    setCurrentPetIndex(currentPetIndex + 1); // Cambia a la siguiente mascota
     };
 
     const volver = () => {
         if (currentPetIndex > 0) {
             setCurrentPetIndex(currentPetIndex - 1); // Vuelve a la mascota anterior
         }
-     };
+   };
 
-    const handleReject = () => {
-        setCurrentPetIndex(currentPetIndex + 1); // Cambia a la siguiente mascota
-    };
+  const handleReject = () => {
+    setCurrentPetIndex(currentPetIndex + 1); // Cambia a la siguiente mascota
+  };
 
-    const panResponder = PanResponder.create({
-        onMoveShouldSetPanResponder: (evt, gestureState) => {
-            const { dx } = gestureState;
-            return Math.abs(dx) > 5; // Personaliza el umbral de deslizamiento aqu�
-        },
-        onPanResponderRelease: (evt, gestureState) => {
-            const { dx } = gestureState;
-            if (dx < 0) {
-                // Deslizar hacia la derecha
-                handleAccept();
-            } else {
-                // Deslizar hacia la izquierda
-                handleReject();
-            }
-        },
-    });
+  const panResponder = PanResponder.create({
+    onMoveShouldSetPanResponder: (evt, gestureState) => {
+      const { dx } = gestureState;
+      return Math.abs(dx) > 5; // Personaliza el umbral de deslizamiento aqu�
+    },
+    onPanResponderRelease: (evt, gestureState) => {
+      const { dx } = gestureState;
+      if (dx < 0) {
+        // Deslizar hacia la derecha
+        handleAccept();
+      } else {
+        // Deslizar hacia la izquierda
+        handleReject();
+      }
+    },
+  });
 
     return (
       <View style={styles.container}>
