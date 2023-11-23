@@ -28,7 +28,7 @@ const BarraNavegacion = ({ icon1, icon2 }) => {
       }}
     >
       <TouchableOpacity onPress={handleFindMatchPress}>
-        <Icon name={icon1} size={30} color="green" />{" "}
+        <Icon name={icon1} size={30} color="green" />
       </TouchableOpacity>
 
       <TouchableOpacity onPress={handleCorazonPress}>

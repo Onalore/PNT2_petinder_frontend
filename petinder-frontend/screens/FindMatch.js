@@ -13,11 +13,12 @@ export default function FindMatch() {
     const [currentPetIndex, setCurrentPetIndex] = useState(0);
 
     const handleAccept = () => {
+        var indice = obtenerIndice(mascota[currentPetIndex]);
+        console.log(indice);
         if (obtenerIndice(mascota[currentPetIndex]) >= 75) {
-            navigation.navigate("Match")
-        } else {
-            var indice = obtenerIndice(mascota[currentPetIndex]);
-            console.log(indice);
+            navigation.navigate("Match", {
+              matchedPet: mascota[currentPetIndex],
+            });
         }
         setCurrentPetIndex(currentPetIndex + 1); // Cambia a la siguiente mascota
     };
