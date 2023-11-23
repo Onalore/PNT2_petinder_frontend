@@ -14,7 +14,7 @@ import imagen13 from "../assets/imgsPerro/13.jpg";
 import imagen14 from "../assets/imgsPerro/14.jpg";
 import imagen15 from "../assets/imgsPerro/15.jpg";
 // definimos las constantes
-const MAX_ELEMENTS = 25;
+const MAX_ELEMENTS = 35;
 
 //defino imagenes
 const imagenes = [imagen1, imagen2, imagen3, imagen4, imagen5, imagen6, imagen7, imagen8, imagen9, imagen10, imagen11, imagen12, imagen13, imagen14, imagen15];
