@@ -23,8 +23,8 @@ const PetCard = ({
 
   const handleImageLoad = () => {
     setImageLoaded(true);
-  };
-
+    };
+    
   return (
     <View style={styles.container}>
       <ImageBackground
