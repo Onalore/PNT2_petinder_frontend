@@ -2,6 +2,7 @@ import PetCard from "../components/PetCard";
 import React, { useState } from "react";
 import { StyleSheet, View, Text, PanResponder } from "react-native";
 import appsettings from "../appsettings.json";
+import mascotas from "../services/mascotas";
 
 export default function FindMatch() {
     const [currentPetIndex, setCurrentPetIndex] = useState(0);

@@ -17,9 +17,25 @@ const generarSexo = () => {
 
 const generarEdad = () => random(0,25);
 
-const generarTipo = () => {
-    const tipos = ["Perro", "Gato", "Conejo"];
-    return tipos[random(0, tipos.length)];
+const seleccionarImagen = () => {
+    const imagenes = [
+        require("../assets/imgsPerro/1.jpeg"),
+        require("../assets/imgsPerro/2.jpeg"),
+        require("../assets/imgsPerro/3.jpeg"),
+        require("../assets/imgsPerro/4.jpeg"),
+        require("../assets/imgsPerro/5.jpeg"),
+        require("../assets/imgsPerro/6.jpeg"),
+        require("../assets/imgsPerro/7.jpeg"),
+        require("../assets/imgsPerro/8.jpg"),
+        require("../assets/imgsPerro/9.jpg"),
+        require("../assets/imgsPerro/10.jpg"),
+        require("../assets/imgsPerro/11.jpg"),
+        require("../assets/imgsPerro/12.jpg"),
+        require("../assets/imgsPerro/13.jpg"),
+        require("../assets/imgsPerro/14.jpg"),
+        require("../assets/imgsPerro/15.jpg"),
+    ];
+    return imagenes[random(0, imagenes.length)];
 }
 
 const generarM2 = () => random(10, 500)
@@ -48,7 +64,7 @@ const crearMascota = () => {
         nombre: generarNombre(),
         sexo: generarSexo(),
         edad: generarEdad(),
-        tipo: generarTipo(),
+        imagen: seleccionarImagen(),
         m2: generarM2(),
         horasSolo: generarHorasSolo(),
         conviveAnimales: generarConviveAnimales(),
