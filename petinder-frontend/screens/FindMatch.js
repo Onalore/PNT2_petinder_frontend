@@ -19,7 +19,7 @@ export default function FindMatch() {
     var indice = obtenerIndice(mascota[currentPetIndex]);
 
     console.log(indice);
-    if (obtenerIndice(mascota[currentPetIndex]) >= 75) {
+    if (obtenerIndice(mascota[currentPetIndex]) >= 85) {
       navigation.navigate("Match", {
         matchedPet: mascota[currentPetIndex],
       });
