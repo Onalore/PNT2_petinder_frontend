@@ -18,6 +18,8 @@ const PetCard = ({
   onAccept,
   onReject,
   panResponder,
+  mascotaAnterior,
+  currentPetIndex,
 }) => {
   const [isImageLoaded, setImageLoaded] = useState(false);
 
@@ -43,11 +45,19 @@ const PetCard = ({
           </View>
         </View>
         <View style={styles.buttonContainer}>
+          {currentPetIndex > 0 && (
+            <TouchableOpacity
+              style={styles.beforeButton}
+              onPress={mascotaAnterior}
+            >
+              <Text style={styles.buttonText}>Anterior</Text>
+            </TouchableOpacity>
+          )}
           <TouchableOpacity style={styles.rejectButton} onPress={onReject}>
-            <Text style={styles.buttonText}>Rechazar</Text>
+            <Text style={styles.buttonText}>Siguiente</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.acceptButton} onPress={onAccept}>
-            <Text style={styles.buttonText}>Aceptar</Text>
+            <Text style={styles.buttonText}>Me interesa</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>
@@ -103,16 +113,22 @@ const styles = StyleSheet.create({
     right: 20,
   },
   acceptButton: {
-    backgroundColor: "green",
+    backgroundColor: "#42c24e",
     padding: 10,
-    borderRadius: 5,
-    width: "48%",
+    borderRadius: 15,
+    width: "30%",
   },
   rejectButton: {
     backgroundColor: "red",
     padding: 10,
-    borderRadius: 5,
-    width: "48%",
+    borderRadius: 15,
+    width: "30%",
+  },
+  beforeButton: {
+    backgroundColor: "#9093d6",
+    padding: 10,
+    borderRadius: 15,
+    width: "30%",
   },
   buttonText: {
     color: "#ffffff",

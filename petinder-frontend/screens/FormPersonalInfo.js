@@ -61,7 +61,7 @@ const FormPersonalInfo = () => {
         fechaNacimiento,
         latitud,
         longitud,
-        telefono
+        telefono,
       };
 
       submitFormData();
@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
     paddingTop: "10%",
     paddingBottom: "4%",
     paddingHorizontal: "8%",
+    height: "100%",
   },
   subContainer: {
     display: "flex",
@@ -173,6 +174,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     width: "100%",
     marginTop: 10,
+    marginBottom: 10,
   },
   picker: {
     flex: 1,

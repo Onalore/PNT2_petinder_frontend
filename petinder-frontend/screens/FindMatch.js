@@ -67,6 +67,8 @@ export default function FindMatch() {
           onAccept={handleAccept}
           onReject={handleReject}
           panResponder={panResponder.panHandlers}
+          mascotaAnterior={volver}
+          currentPetIndex={currentPetIndex}
         />
       ) : (
         <Text style={styles.texto2}>
