@@ -68,7 +68,7 @@ for (let i = 0; i < MAX_ELEMENTS; i++) {
     mascotas.push(crearMascota());
 }
 
-console.log(mascotas); // Esto mostrará las mascotas generadas en la consola
+//console.log(mascotas); // Esto mostrará las mascotas generadas en la consola
 
-//// exportamos las mascotas
-//export default mascotas;
+// exportamos las mascotas
+export default mascotas;
