@@ -5,7 +5,7 @@ import Title from "../components/Title";
 
 const Match = ({ route, navigation }) => {
 
-  const numeroTelefono = "1121652918";
+  const numeroTelefono = "+54 01121652918";
 
   const abrirWhatsApp = () => {
     const enlaceWhatsApp = `whatsapp://send?phone=${numeroTelefono}`;
