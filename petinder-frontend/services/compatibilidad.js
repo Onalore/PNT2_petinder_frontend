@@ -9,47 +9,47 @@ export const obtenerIndice = (mascota) => {
     const porcentajeDiferenciaM2 = (usuario.m2Disponibles - mascota.m2) / mascota.m2;
 
     if (porcentajeDiferenciaM2 >= -0.1) {
-        indice += 25;
+        indice += 65;
     } else if (porcentajeDiferenciaM2 >= -0.2) {
         indice += 15;
     } else {
-        indice -= 30;
+        indice -= 5;
     }
 
     //Comparación de horas
     const diferenciaHoras = Math.abs(usuario.horasAlDia - mascota.horasSolo);
 
     if (diferenciaHoras <= 1) {
-        indice += 25;
+        indice += 45;
     } else if (diferenciaHoras === 2) {
         indice += 10;
     } else {
-        indice -= 35;
+        indice -= 5;
     }
 
     //Convivencia con otros animales
     if (usuario.animales === mascota.conviveAnimales) {
-        indice += 30;
+        indice += 50;
     } else {
-        indice -= 40;
+        indice -= 20;
     }
 
     //Convivencia con niños
     if (usuario.ninios === mascota.conviveNinios) {
-        indice += 30;
+        indice += 40;
     } else {
-        indice -= 40;
+        indice -= 15;
     }
 
     //Coincidencia de tamaño
     if (usuario.tamanio === mascota.tamanio) {
         indice += 20;
     } else if (usuario.tamanio == "Chico" && mascota.tamanio == "Grande") {
-        indice -= 10
+        indice -= 5
     } else if (usuario.tamanio == "Chico" && mascota.tamanio == "Mediano") {
-        indice -= 5
+        indice -= 2
     } else if (usuario.tamanio == "Mediano" && mascota.tamanio == "Grande") {
-        indice -= 5
+        indice -= 2
     }
 
     // Asegurarse de que el índice esté en el rango de 0 a 100

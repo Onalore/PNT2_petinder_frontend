@@ -9,7 +9,7 @@ export const MascotaContext = createContext();
 
 export default function App() {
     // Estado para la mascota en el contexto
-    const [mascota, setMascota] = useState(null);
+    const [mascota, setMascota] = useState([]);
 
     useEffect(() => {
         setMascota(mascotas);

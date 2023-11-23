@@ -8,6 +8,7 @@ import FormPersonalInfo from "./screens/FormPersonalInfo";
 import FormPetInfo from "./screens/FormPetInfo";
 import SuccessfulRegistration from "./screens/SuccessfulRegistration";
 import FindMatch from "./screens/FindMatch";
+import Match from "./screens/Match";
 
 const HomeStackNavigator = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ function MyStack() {
         component={SuccessfulRegistration}
       />
       <HomeStackNavigator.Screen name="FindMatch" component={FindMatch} />
+      <HomeStackNavigator.Screen name="Match" component={Match} />
     </HomeStackNavigator.Navigator>
   );
 }
