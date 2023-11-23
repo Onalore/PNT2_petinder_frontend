@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Image, StyleSheet, ScrollView, Picker, View } from "react-native";
+import { Image, StyleSheet, ScrollView, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Title from "../components/Title";
 import InputCircleBorder from "../components/InputCircleBorder";
 import TextPersonalized from "../components/TextPersonalized";
 import Button from "../components/Button";
 import * as Location from "expo-location";
+import { Picker } from "@react-native-picker/picker";
 
 const FormPersonalInfo = () => {
   {
@@ -14,8 +15,6 @@ const FormPersonalInfo = () => {
     const [apellido, setApellido] = useState("");
     const [fechaNacimiento, setFechaNacimiento] = useState("");
     const [telefono, setTelefono] = useState("");
-    const [instagram, setInstagram] = useState("");
-    const [facebook, setFacebook] = useState("");
     const [dia, setDia] = useState("01");
     const [mes, setMes] = useState("01");
     const [anio, setAnio] = useState("2023");
@@ -129,18 +128,6 @@ const FormPersonalInfo = () => {
           placeholder="Teléfono"
           value={telefono}
           onChangeText={(text) => setTelefono(text)}
-        />
-        <TextPersonalized text="Instagram" />
-        <InputCircleBorder
-          placeholder="Instagram"
-          value={instagram}
-          onChangeText={(text) => setInstagram(text)}
-        />
-        <TextPersonalized text="Facebook" />
-        <InputCircleBorder
-          placeholder="Facebook"
-          value={facebook}
-          onChangeText={(text) => setFacebook(text)}
         />
         <Button text="Continuar" onPress={handleFormSubmit} />
       </ScrollView>
