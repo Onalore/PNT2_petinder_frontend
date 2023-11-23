@@ -31,7 +31,7 @@ export default function App() {
       }}
     >
       <View style={styles.container}>
-        <StatusBar style="auto" />
+        <StatusBar translucent backgroundColor="transparent" style="light" />
         <Navigation />
       </View>
     </MascotaContext.Provider>
