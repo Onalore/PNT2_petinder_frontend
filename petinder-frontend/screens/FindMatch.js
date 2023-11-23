@@ -1,14 +1,23 @@
 import PetCard from "../components/PetCard";
 import React, { useState, useContext } from "react";
 import { StyleSheet, View, Text, PanResponder } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import appsettings from "../appsettings.json";
 import { MascotaContext } from "../App";
+import { obtenerIndice } from "../services/compatibilidad";
 
 export default function FindMatch() {
+    const navigation = useNavigation();
     const { mascota } = useContext(MascotaContext);
     const [currentPetIndex, setCurrentPetIndex] = useState(0);
 
     const handleAccept = () => {
+        if (obtenerIndice(mascota[currentPetIndex]) >= 75) {
+            navigation.navigate("Match")
+        } else {
+            var indice = obtenerIndice(mascota[currentPetIndex]);
+            console.log(indice);
+        }
         setCurrentPetIndex(currentPetIndex + 1); // Cambia a la siguiente mascota
     };
 
@@ -23,7 +32,7 @@ export default function FindMatch() {
         },
         onPanResponderRelease: (evt, gestureState) => {
             const { dx } = gestureState;
-            if (dx > 0) {
+            if (dx < 0) {
                 // Deslizar hacia la derecha
                 handleAccept();
             } else {
