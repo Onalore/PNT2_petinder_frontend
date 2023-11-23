@@ -21,17 +21,20 @@ const BarraNavegacion = ({ icon }) => {
         justifyContent: "space-between",
         alignItems: "center",
         padding: 10,
-        position: "absolute",
+        width: "100%",
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor: "#FFFFFF"
+        backgroundColor: "#FFFFFF",
+        zIndex: 1,
       }}
     >
       <TouchableOpacity onPress={handleFindMatchPress}>
-        <Image source={require("../assets/logo.png")} style={styles.imagen} />
+        <Image
+          source={require("../assets/adaptive-icon.png")}
+          style={styles.imagen}
+        />
       </TouchableOpacity>
-
       <TouchableOpacity onPress={handleCorazonPress}>
         <Icon name={icon} size={30} color="green" />
       </TouchableOpacity>
@@ -42,9 +45,8 @@ const BarraNavegacion = ({ icon }) => {
 export default BarraNavegacion;
 
 const styles = StyleSheet.create({
-    imagen: {
-        width: 30,
-        height: 30,
-        marginBottom: "24%",
-    }
+  imagen: {
+    width: 50,
+    height: 50,
+  },
 });

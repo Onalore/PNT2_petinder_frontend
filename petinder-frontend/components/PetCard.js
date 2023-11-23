@@ -23,8 +23,8 @@ const PetCard = ({
 
   const handleImageLoad = () => {
     setImageLoaded(true);
-    };
-    
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -57,11 +57,12 @@ const PetCard = ({
 
 const styles = StyleSheet.create({
   container: {
-    height: "95%",
+    height: "93%",
     width: "100%",
     display: "flex",
     backgroundColor: "#ffffff",
-    overflow: "hidden",  },
+    overflow: "hidden",
+  },
   image: {
     flex: 1,
     resizeMode: "cover",
