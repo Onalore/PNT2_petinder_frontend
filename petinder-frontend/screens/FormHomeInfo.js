@@ -37,10 +37,15 @@ const FormHomeInfo = () => {
         title="¿Cuantos m2 dispone de su hogar?"
         child={
           <InputBottomLine
-            placeholder="Tu respuesta"
-            value={m2Disponibles}
-            onChangeText={(text) => setm2Disponibles(text)}
-          />
+                placeholder="Tu respuesta"
+                value={m2Disponibles}
+                onChangeText={(text) => {
+                    if (/^\d+$/.test(text) || text === '') { //verifica que el texto ingresado sean unicamente numeros
+                        setm2Disponibles(text);
+                    }
+                }}
+                keyboardType="numeric" //en el celular aparece el teclado numerico
+                />
         }
       />
       <Card
@@ -81,9 +86,16 @@ const FormHomeInfo = () => {
         title="¿Cuantas horas al dia pasas en tu casa?"
         child={
           <InputBottomLine
-            placeholder="Tu respuesta"
-            value={horasAlDia}
-            onChangeText={(text) => setHorasAlDia(text)}
+                placeholder="Tu respuesta"
+                value={horasAlDia}
+                onChangeText={(text) => {
+                    const numerico = parseInt(text, 10); //convierte el texto ingresado en un numero con base 10
+
+                    if (text === '' || !isNaN(numerico) && numerico >= 0 && numerico <= 24) {
+                        setHorasAlDia(text)
+                    } //controla que el numero este entre 0 y 24
+                }}
+                keyboardType = "numeric" //en el celular aparece el teclado numerico
           />
         }
       />
@@ -111,9 +123,12 @@ const FormHomeInfo = () => {
       />
       <Button
               text="Continuar"
+              //disabled={!m2Disponibles || !horasAlDia} // Deshabilita el botón si alguno de los campos está vacío
               onPress={() => {
-                  guardarDatosUsuario();
-                  navigation.navigate("FormPetInfo")
+                  if (m2Disponibles && horasAlDia) {
+                      guardarDatosUsuario();
+                      navigation.navigate("FormPetInfo")
+                  }
               }}
       />
     </ScrollView>
