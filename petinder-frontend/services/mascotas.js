@@ -1,5 +1,23 @@
+import imagen1 from "../assets/imgsPerro/1.jpg";
+import imagen2 from "../assets/imgsPerro/2.jpg";
+import imagen3 from "../assets/imgsPerro/3.jpg";
+import imagen4 from "../assets/imgsPerro/4.jpg";
+import imagen5 from "../assets/imgsPerro/5.jpg";
+import imagen6 from "../assets/imgsPerro/6.jpeg";
+import imagen7 from "../assets/imgsPerro/7.jpeg";
+import imagen8 from "../assets/imgsPerro/8.jpg";
+import imagen9 from "../assets/imgsPerro/9.jpg";
+import imagen10 from "../assets/imgsPerro/10.jpg";
+import imagen11 from "../assets/imgsPerro/11.jpg";
+import imagen12 from "../assets/imgsPerro/12.jpg";
+import imagen13 from "../assets/imgsPerro/13.jpg";
+import imagen14 from "../assets/imgsPerro/14.jpg";
+import imagen15 from "../assets/imgsPerro/15.jpg";
 // definimos las constantes
-const MAX_ELEMENTS = 15;
+const MAX_ELEMENTS = 25;
+
+//defino imagenes
+const imagenes = [imagen1, imagen2, imagen3, imagen4, imagen5, imagen6, imagen7, imagen8, imagen9, imagen10, imagen11, imagen12, imagen13, imagen14, imagen15];
 
 // definimos las funciones
 const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
@@ -18,23 +36,6 @@ const generarSexo = () => {
 const generarEdad = () => random(0,25);
 
 const seleccionarImagen = () => {
-    const imagenes = [
-        require("../assets/imgsPerro/1.jpeg"),
-        require("../assets/imgsPerro/2.jpeg"),
-        require("../assets/imgsPerro/3.jpeg"),
-        require("../assets/imgsPerro/4.jpeg"),
-        require("../assets/imgsPerro/5.jpeg"),
-        require("../assets/imgsPerro/6.jpeg"),
-        require("../assets/imgsPerro/7.jpeg"),
-        require("../assets/imgsPerro/8.jpg"),
-        require("../assets/imgsPerro/9.jpg"),
-        require("../assets/imgsPerro/10.jpg"),
-        require("../assets/imgsPerro/11.jpg"),
-        require("../assets/imgsPerro/12.jpg"),
-        require("../assets/imgsPerro/13.jpg"),
-        require("../assets/imgsPerro/14.jpg"),
-        require("../assets/imgsPerro/15.jpg"),
-    ];
     return imagenes[random(0, imagenes.length)];
 }
 

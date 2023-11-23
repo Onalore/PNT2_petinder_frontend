@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity, PanResponder } from "react-native";
 
-const PetCard = ({ imageUrl, desc, title, logoUrl, onAccept, onReject, panResponder }) => {
+const PetCard = ({ imagen, sexo, nombre, edad, logoUrl, onAccept, onReject, panResponder }) => {
     const [isImageLoaded, setImageLoaded] = useState(false);
-
+    
     const handleImageLoad = () => {
         setImageLoaded(true);
     };
@@ -11,7 +11,7 @@ const PetCard = ({ imageUrl, desc, title, logoUrl, onAccept, onReject, panRespon
     return (
         <View style={styles.container}>
             <ImageBackground
-                source={imageUrl}
+                source={imagen}
                 style={styles.image}
                 onLoad={handleImageLoad}
                 {...panResponder}
@@ -19,8 +19,8 @@ const PetCard = ({ imageUrl, desc, title, logoUrl, onAccept, onReject, panRespon
                 <View style={styles.overlay}>
                     <Image source={logoUrl} style={styles.logo} />
                     <View style={styles.textContainer}>
-                        <Text style={styles.title}>{title}</Text>
-                        <Text style={styles.desc}>{desc}</Text>
+                        <Text style={styles.nombre}>{nombre}</Text>
+                        <Text style={styles.sexo}>{sexo}, {edad} meses</Text>
                     </View>
                 </View>
                 <View style={styles.buttonContainer}>
@@ -38,14 +38,15 @@ const PetCard = ({ imageUrl, desc, title, logoUrl, onAccept, onReject, panRespon
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height: "100%",
+        width:"100%",
+        display: "flex",
         backgroundColor: "#ffffff",
         overflow: "hidden",
     },
     image: {
-        width: "100%",
-        height: "100%",
-        position: "relative",
+        flex: 1,
+        resizeMode: "cover", 
         justifyContent: "flex-end",
     },
     overlay: {
@@ -57,11 +58,11 @@ const styles = StyleSheet.create({
         marginBottom: 70,
         zIndex: 1
     },
-    desc: {
+    sexo: {
         fontSize: 20,
         color: "#ffffff",
     },
-    title: {
+    nombre: {
         fontSize: 30,
         color: "#ffffff",
         fontWeight: "bold",

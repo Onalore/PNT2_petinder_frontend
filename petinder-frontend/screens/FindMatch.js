@@ -1,10 +1,11 @@
 import PetCard from "../components/PetCard";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, View, Text, PanResponder } from "react-native";
 import appsettings from "../appsettings.json";
-import mascotas from "../services/mascotas";
+import { MascotaContext } from "../App";
 
 export default function FindMatch() {
+    const { mascota } = useContext(MascotaContext);
     const [currentPetIndex, setCurrentPetIndex] = useState(0);
 
     const handleAccept = () => {
@@ -34,9 +35,9 @@ export default function FindMatch() {
 
     return (
         <View style={styles.container}>
-            {currentPetIndex < appsettings.pets.length ? (
+            {currentPetIndex < mascota.length ? (
                 <PetCard
-                    {...appsettings.pets[currentPetIndex]}
+                    {...mascota[currentPetIndex]}
                     onAccept={handleAccept}
                     onReject={handleReject}
                     panResponder={panResponder.panHandlers}
