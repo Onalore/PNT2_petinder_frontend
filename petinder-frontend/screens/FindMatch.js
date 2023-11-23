@@ -2,23 +2,25 @@ import PetCard from "../components/PetCard";
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import appsettings from "../appsettings.json";
+import mascotas from "../services/mascotas";
 
 export default function FindMatch() {
     const [currentPetIndex, setCurrentPetIndex] = useState(0);
-    const pets = [
-        {
-            imageUrl: require("../assets/perritoEnAdopcion.png"),
-            title: "Delfina",
-            desc: "Tiene 3 meses y se encuentra desparasitada",
-            logo: require("../assets/adaptive-icon.png")
-        },
-        {
-            imageUrl: require("../assets/gatito.jpg"),
-            title: "Zoe",
-            desc: "Gatita de 8 semanas y desparacitada",
-            logo: require("../assets/adaptive-icon.png")
-        }
-    ];
+    const pets = mascotas;
+    console.log("pets: ", pets);
+    //    {
+    //        imageUrl: require("../assets/perritoEnAdopcion.png"),
+    //        title: "Delfina",
+    //        desc: "Tiene 3 meses y se encuentra desparasitada",
+    //        logo: require("../assets/adaptive-icon.png")
+    //    },
+    //    {
+    //        imageUrl: require("../assets/gatito.jpg"),
+    //        title: "Zoe",
+    //        desc: "Gatita de 8 semanas y desparasitada",
+    //        logo: require("../assets/adaptive-icon.png")
+    //    }
+    //];
 
     const handleAccept = () => {
         setCurrentPetIndex(currentPetIndex + 1); // Cambia a la siguiente mascota
