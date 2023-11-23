@@ -37,9 +37,6 @@ const Match = ({ route, navigation }) => {
   );
 };
 
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
-
 
 const styles = StyleSheet.create({
   container: {
@@ -48,8 +45,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   imagen: {
-    width: windowWidth,
-    height: windowHeight,
+    width: "100%",
+    height: "100%",
     flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
