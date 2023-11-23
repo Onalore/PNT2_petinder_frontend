@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import appsettings from "../appsettings.json";
 import { MascotaContext } from "../App";
 import { obtenerIndice } from "../services/compatibilidad";
+import BarraNavegacion from "../components/BarraNavigation";
 
 export default function FindMatch() {
     const navigation = useNavigation();
@@ -28,7 +29,7 @@ export default function FindMatch() {
     const panResponder = PanResponder.create({
         onMoveShouldSetPanResponder: (evt, gestureState) => {
             const { dx } = gestureState;
-            return Math.abs(dx) > 5; // Personaliza el umbral de deslizamiento aquÌ
+            return Math.abs(dx) > 5; // Personaliza el umbral de deslizamiento aquÔøΩ
         },
         onPanResponderRelease: (evt, gestureState) => {
             const { dx } = gestureState;
@@ -43,30 +44,33 @@ export default function FindMatch() {
     });
 
     return (
-        <View style={styles.container}>
-            {currentPetIndex < mascota.length ? (
-                <PetCard
-                    {...mascota[currentPetIndex]}
-                    onAccept={handleAccept}
-                    onReject={handleReject}
-                    panResponder={panResponder.panHandlers}
-                />
-            ) : (
-                <Text style={styles.texto2}>No hay m·s mascotas en tu zona</Text>
-            )}
-        </View>
+      <View style={styles.container}>
+        <BarraNavegacion
+          icon1= "home-outline" icon2= "cards-heart-outline"/>
+        {currentPetIndex < mascota.length ? (
+          <PetCard
+            {...mascota[currentPetIndex]}
+            onAccept={handleAccept}
+            onReject={handleReject}
+            panResponder={panResponder.panHandlers}
+          />
+        ) : (
+          <Text style={styles.texto2}>No hay m√°s mascotas en tu zona</Text>
+        )}
+      </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    texto2: {
-        fontSize: 16,
-        color: appsettings.colors.primary,
-        marginLeft: 5,
-    }
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    justifyContent: "flex-end"
+  },
+  texto2: {
+    fontSize: 16,
+    color: appsettings.colors.primary,
+    marginLeft: 5,
+  },
 });
