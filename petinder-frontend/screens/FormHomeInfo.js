@@ -6,6 +6,7 @@ import Title from "../components/Title";
 import Button from "../components/Button";
 import InputBottomLine from "../components/InputBottomLine";
 import CheckboxCircle from "../components/CheckboxCircle";
+import { guardarUsuario } from "../services/compatibilidad";
 
 const FormHomeInfo = () => {
   const navigation = useNavigation();
@@ -14,6 +15,19 @@ const FormHomeInfo = () => {
   const [horasAlDia, setHorasAlDia] = useState("");
   const [ninios, setNinios] = useState("");
   const [tamanio, setTamanio] = useState("");
+
+    // Función para guardar los datos del usuario antes de navegar
+    const guardarDatosUsuario = () => {
+        const user = {
+            m2Disponibles,
+            animales,
+            horasAlDia,
+            ninios,
+            tamanio,
+        };
+
+        guardarUsuario(user); // Guarda los datos del usuario en el servicio
+    };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -96,11 +110,14 @@ const FormHomeInfo = () => {
         }
       />
       <Button
-        text="Continuar"
-        onPress={() => navigation.navigate("FormPetInfo")}
+              text="Continuar"
+              onPress={() => {
+                  guardarDatosUsuario();
+                  navigation.navigate("FormPetInfo")
+              }}
       />
     </ScrollView>
-  );
+    );
 };
 
 export default FormHomeInfo;
