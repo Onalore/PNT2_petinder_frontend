@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, ScrollView, Picker, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Title from "../components/Title";
 import InputCircleBorder from "../components/InputCircleBorder";
 import TextPersonalized from "../components/TextPersonalized";
 import Button from "../components/Button";
+import * as Location from "expo-location";
 
 const FormPersonalInfo = () => {
   {
@@ -12,16 +13,14 @@ const FormPersonalInfo = () => {
     const [nombre, setNombre] = useState("");
     const [apellido, setApellido] = useState("");
     const [fechaNacimiento, setFechaNacimiento] = useState("");
-    const [direccion, setDireccion] = useState("");
-    const [localidad, setLocalidad] = useState("");
-    const [provincia, setProvincia] = useState("");
-    const [piso, setPiso] = useState("");
     const [telefono, setTelefono] = useState("");
     const [instagram, setInstagram] = useState("");
     const [facebook, setFacebook] = useState("");
     const [dia, setDia] = useState("01");
     const [mes, setMes] = useState("01");
     const [anio, setAnio] = useState("2023");
+    const [ubicacion, setUbicacion] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
 
     const dias = Array.from({ length: 31 }, (_, index) =>
       (index + 1).toString().padStart(2, "0")
@@ -33,15 +32,36 @@ const FormPersonalInfo = () => {
       (2023 - index).toString()
     );
 
-    const handleFormSubmit = () => {
+    useEffect(() => {
+      (async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          setErrorMsg("Permission to access location was denied");
+          return;
+        }
+
+        let ubicacion = await Location.getCurrentPositionAsync({});
+        setUbicacion(ubicacion);
+      })();
+    }, []);
+
+    let text = "Waiting..";
+    if (errorMsg) {
+      text = errorMsg;
+    } else if (ubicacion) {
+      text = JSON.stringify(ubicacion);
+    }
+
+    const handleFormSubmit = async () => {
+      //obtener ubicacion actual
+      const location = await Location.getCurrentPositionAsync({});
+      const { latitud, longitud } = location.coords;
       const formData = {
         nombre,
         apellido,
         fechaNacimiento,
-        direccion,
-        localidad,
-        provincia,
-        piso,
+        latitud,
+        longitud,
         telefono,
         instagram,
         facebook,
@@ -104,30 +124,6 @@ const FormPersonalInfo = () => {
             ))}
           </Picker>
         </View>
-        <TextPersonalized text="Dirección" />
-        <InputCircleBorder
-          placeholder="Dirección"
-          value={direccion}
-          onChangeText={(text) => setDireccion(text)}
-        />
-        <TextPersonalized text="Localidad" />
-        <InputCircleBorder
-          placeholder="Localidad"
-          value={localidad}
-          onChangeText={(text) => setLocalidad(text)}
-        />
-        <TextPersonalized text="Provincia" />
-        <InputCircleBorder
-          placeholder="Provincia"
-          value={provincia}
-          onChangeText={(text) => setProvincia(text)}
-        />
-        <TextPersonalized text="Piso (opcional)" />
-        <InputCircleBorder
-          placeholder="Piso (opcional)"
-          value={piso}
-          onChangeText={(text) => setPiso(text)}
-        />
         <TextPersonalized text="Teléfono" />
         <InputCircleBorder
           placeholder="Teléfono"
