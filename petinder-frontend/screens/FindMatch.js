@@ -6,7 +6,6 @@ import appsettings from "../appsettings.json";
 import { MascotaContext } from "../App";
 import { obtenerIndice } from "../services/compatibilidad";
 import BarraNavegacion from "../components/BarraNavigation";
-import { TouchableOpacity } from "react-native";
 
 export default function FindMatch() {
   const navigation = useNavigation();

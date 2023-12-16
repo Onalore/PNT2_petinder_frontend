@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Image, StyleSheet, ScrollView, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  ScrollView,
+  View,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Title from "../components/Title";
 import InputCircleBorder from "../components/InputCircleBorder";
@@ -7,6 +14,11 @@ import TextPersonalized from "../components/TextPersonalized";
 import Button from "../components/Button";
 import * as Location from "expo-location";
 import { Picker } from "@react-native-picker/picker";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../firebase.config";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import dayjs from "dayjs";
 
 const FormPersonalInfo = () => {
   {
@@ -15,11 +27,12 @@ const FormPersonalInfo = () => {
     const [apellido, setApellido] = useState("");
     const [fechaNacimiento, setFechaNacimiento] = useState("");
     const [telefono, setTelefono] = useState("");
-    const [dia, setDia] = useState("01");
-    const [mes, setMes] = useState("01");
-    const [anio, setAnio] = useState("2023");
+    const [fecha, setFecha] = useState(dayjs());
     const [ubicacion, setUbicacion] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     const dias = Array.from({ length: 31 }, (_, index) =>
       (index + 1).toString().padStart(2, "0")
@@ -43,6 +56,23 @@ const FormPersonalInfo = () => {
         setUbicacion(ubicacion);
       })();
     }, []);
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const handleCreateAccount = () => {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          console.log("Signed in !");
+          const user = userCredential.user;
+          console.log(user);
+          handleFormSubmit();
+        })
+        .catch((error) => {
+          console.log(error);
+          Alert.alert(error.message);
+        });
+    };
 
     let text = "Waiting..";
     if (errorMsg) {
@@ -71,6 +101,19 @@ const FormPersonalInfo = () => {
       navigation.navigate("FormHomeInfo");
     };
 
+    const showDatePicker = () => {
+      setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+      setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+      console.warn("A date has been picked: ", date);
+      hideDatePicker();
+    };
+
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.subContainer}>
@@ -91,8 +134,20 @@ const FormPersonalInfo = () => {
         />
 
         <TextPersonalized text="Fecha de Nacimiento" />
-
-        <View style={styles.selectContainer}>
+        <TouchableOpacity onPress={showDatePicker} style={{ width: "100%" }}>
+          <InputCircleBorder
+            placeholder="Fecha de Nacimiento"
+            value={fecha}
+            editable={false}
+          />
+        </TouchableOpacity>
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+        />
+        {/* <View style={styles.selectContainer}>
           <Picker
             style={styles.picker}
             selectedValue={dia}
@@ -120,14 +175,25 @@ const FormPersonalInfo = () => {
               <Picker.Item key={a} label={a} value={a} />
             ))}
           </Picker>
-        </View>
+        </View> */}
         <TextPersonalized text="Teléfono" />
         <InputCircleBorder
           placeholder="Teléfono"
           value={telefono}
           onChangeText={(text) => setTelefono(text)}
         />
-        <Button text="Continuar" onPress={handleFormSubmit} />
+        <InputCircleBorder
+          placeholder="Email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+        />
+        <InputCircleBorder
+          placeholder="Contraseña"
+          onChangeText={(text) => setPassword(text)}
+          value={password}
+          secure={true}
+        />
+        <Button text="Continuar" onPress={handleCreateAccount} />
       </ScrollView>
     );
   }

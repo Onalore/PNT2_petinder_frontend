@@ -2,7 +2,13 @@ import React from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 import appsettings from "../appsettings.json";
 
-const InputCircleBorder = ({ placeholder, value, onChangeText, secure }) => {
+const InputCircleBorder = ({
+  placeholder,
+  value,
+  onChangeText,
+  secure,
+  editable,
+}) => {
   return (
     <TextInput
       style={styles.input}
@@ -10,6 +16,7 @@ const InputCircleBorder = ({ placeholder, value, onChangeText, secure }) => {
       value={value}
       onChangeText={onChangeText}
       secureTextEntry={!secure ? false : secure}
+      editable={editable}
     />
   );
 };

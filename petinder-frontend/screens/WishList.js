@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import PetWish from "../components/PetWish";
-import { MascotaContext } from "../App";
 import BarraNavegacion from "../components/BarraNavigation";
 import { Divider } from "@rneui/themed";
 
 const WishList = () => {
-  const { mascotasDeseadas } = useContext(MascotaContext);
+  const { mascotasDeseadas } = useContext(require("../App").MascotaContext);
 
   return (
     <View style={styles.container}>

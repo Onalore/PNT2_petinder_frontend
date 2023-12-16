@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, ScrollView, Image } from "react-native";
-import LoginService from "../services/login";
+import { Text, StyleSheet, View, ScrollView, Image, Alert } from "react-native";
 import Button from "../components/Button";
 import Title from "../components/Title";
 import { useNavigation } from "@react-navigation/native";
 import appsettings from "../appsettings.json";
 import InputCircleBorder from "../components/InputCircleBorder";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../firebase.config";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -13,10 +15,24 @@ export default function Login() {
   const navigation = useNavigation();
 
   const login = () => {
-    LoginService.login({ email, password }).then((authData) =>
-      console.log(authData)
-    );
-    navigation.navigate("FindMatch");
+    handleSignIn();
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const handleSignIn = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log("Account created!");
+        const user = userCredential.user;
+        console.log("Se autenticó a " + user.email);
+        navigation.navigate("FindMatch");
+      })
+      .catch((error) => {
+        console.log(error);
+        Alert.alert(error.message);
+      });
   };
 
   return (

@@ -17,8 +17,7 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <Image source={require("../assets/logo.png")} style={styles.imagen} />
-          <Title title={"Valida tu identidad"} />
-
+      <Title title={"Valida tu identidad"} />
       <TouchableOpacity>
         <CardIconText
           icon={"email"}
@@ -27,23 +26,20 @@ export default function Home() {
           onPress={() => navigation.navigate("Login")}
         />
       </TouchableOpacity>
-
-      <TouchableOpacity>
+      {/* <TouchableOpacity>
         <CardIconText
           icon={"google"}
           title={"Google"}
           text={"Ingresa con google"}
           onPress={() => navigation.navigate("Login")}
         />
-      </TouchableOpacity>
-
+      </TouchableOpacity> */}
       <TouchableOpacity onPress={() => navigation.navigate("FormPersonalInfo")}>
         <View style={styles.textAlignment}>
           <Text style={styles.texto1}>Regístrate</Text>
           <Text style={styles.texto2}>si no tienes cuenta</Text>
         </View>
       </TouchableOpacity>
-
     </View>
   );
 }
