@@ -19,9 +19,9 @@ export const obtenerIndice = (mascota) => {
     (usuario.m2Disponibles - mascota.m2) / mascota.m2;
 
   if (porcentajeDiferenciaM2 >= -0.2) {
-    indice += 45;
+    indice += 35;
   } else if (porcentajeDiferenciaM2 >= -0.4) {
-    indice += 20;
+    indice += 15;
   } else {
     indice -= 15;
   }
@@ -30,18 +30,18 @@ export const obtenerIndice = (mascota) => {
   const horasFuera = 24 - usuario.horasAlDia;
 
   if (horasFuera <= mascota.horasSolo) {
-    indice += 35;
+    indice += 25;
   } else {
-    indice -= 20;
+    indice -= 10;
   }
 
     //Convivencia con otros animales
     // Si el usuario no tiene otros animales no entra
     if (usuario.animales) {
         if (mascota.conviveAnimales) {
-            indice += 20;
+            indice += 10;
         } else {
-            indice -= 40;
+            indice -= 30;
         }
     } else {
         indice += 20;
@@ -53,7 +53,7 @@ export const obtenerIndice = (mascota) => {
         if (mascota.conviveNinios) {
             indice += 20;
         } else {
-            indice -= 40;
+            indice -= 30;
         }
     } else {
         indice += 20;
@@ -62,7 +62,7 @@ export const obtenerIndice = (mascota) => {
 
   //Coincidencia de tama�o
   if (usuario.tamanio === mascota.tamanio) {
-    indice += 20;
+    indice += 7;
   } else if (usuario.tamanio == "Chico" && mascota.tamanio == "Grande") {
     indice -= 5;
   } else if (usuario.tamanio == "Chico" && mascota.tamanio == "Mediano") {
