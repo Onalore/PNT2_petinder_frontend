@@ -3,16 +3,9 @@ import Title from "../components/Title";
 import appsettings from "../appsettings.json";
 import { useNavigation } from "@react-navigation/native";
 import CardIconText from "../components/CardIconText";
-//import * as GoogleSingIn from "expo-auth-session/provider/google";
 
 export default function Home() {
   const navigation = useNavigation();
-  //   const { request, response, promptAsync } = Google.useAuthRequest({
-  //     androidClientId:
-  //       "185014890847-p6p59l9kb3l088esl1sjkdbikn1nts48.apps.googleusercontent.com",
-  //   });
-
-  const Login = () => {};
 
   return (
     <View style={styles.container}>

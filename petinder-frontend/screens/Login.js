@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, ScrollView, Image, Alert } from "react-native";
+import { StyleSheet, View, ScrollView, Image, Alert } from "react-native";
 import Button from "../components/Button";
 import Title from "../components/Title";
 import { useNavigation } from "@react-navigation/native";
 import appsettings from "../appsettings.json";
 import InputCircleBorder from "../components/InputCircleBorder";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "../firebase.config";
+import { app } from "../App";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -18,8 +17,8 @@ export default function Login() {
     handleSignIn();
   };
 
-  const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  console.log("auth ", auth.currentUser);
 
   const handleSignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
