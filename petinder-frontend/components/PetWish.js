@@ -1,36 +1,45 @@
-import React, { useState, useEffect }  from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity, Linking } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import appsettings from "../appsettings.json";
-import { ProgressBar } from 'react-native-paper';
+import { ProgressBar } from "react-native-paper";
 import { obtenerIndice } from "../services/compatibilidad";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const PetWish = ({ mascota, onPress }) => {
   const [compatibilidad, setCompatibilidad] = useState();
+  const [indice, setIndice] = useState(0);
   const numeroTelefono = "+54 01121652918";
+  const indiceMinimoParaMatch = 85;
 
   const abrirWhatsApp = () => {
     const enlaceWhatsApp = `whatsapp://send?phone=${numeroTelefono}`;
 
     Linking.openURL(enlaceWhatsApp).catch(() => {
-      alert("La aplicación de WhatsApp no está instalada en tu dispositivo.");
+      alert("La aplicaciï¿½n de WhatsApp no estï¿½ instalada en tu dispositivo.");
     });
   };
 
   useEffect(() => {
-    const indice = obtenerIndice(mascota);
-    const compatiblidadProgressBar = indice / 100;
+    const i = obtenerIndice(mascota);
+    setIndice(i);
+    const compatiblidadProgressBar = i / 100;
     setCompatibilidad(compatiblidadProgressBar);
   }, [mascota]);
 
   const obtenerColorProgressBar = () => {
     if (compatibilidad >= 0.65) {
-      return 'green';
+      return "green";
     } else if (compatibilidad >= 0.3) {
-      return 'yellow';
+      return "#fcba03";
     } else {
-      return 'red';
+      return "red";
     }
   };
 
@@ -39,14 +48,27 @@ const PetWish = ({ mascota, onPress }) => {
       <Image source={mascota.imagen} style={styles.itemImage} />
       <View style={styles.textContainer}>
         <Text style={styles.itemName}>{mascota.nombre}</Text>
-        <Text style={styles.texto}>Indice de compatibilidad</Text>
-        <ProgressBar progress={compatibilidad} theme={{ colors: { primary: obtenerColorProgressBar() } }} />
+        <Text style={styles.texto}>Tu compatibilidad: </Text>
+        <ProgressBar
+          progress={compatibilidad}
+          theme={{ colors: { primary: obtenerColorProgressBar() } }}
+          style={styles.roundedProgressBar}
+        />
       </View>
-      <TouchableOpacity onPress={onPress}>
-        <View>
-          <Icon style={styles.circle} name={"whatsapp"} size={30} color="black" onPress={abrirWhatsApp}/>
-        </View>
-      </TouchableOpacity>
+      {indice >= indiceMinimoParaMatch ? (
+        <TouchableOpacity onPress={onPress}>
+          <View style={styles.circle}>
+            <Icon
+              name={"whatsapp"}
+              size={35}
+              color="white"
+              onPress={abrirWhatsApp}
+            />
+          </View>
+        </TouchableOpacity>
+      ) : (
+        <View style={{ marginRight: 70 }}></View>
+      )}
     </View>
   );
 };
@@ -76,20 +98,26 @@ const styles = StyleSheet.create({
     color: appsettings.colors.primary,
   },
   circle: {
-    flexDirection: "row",
-    width: 60,
-    height: 60,
-    borderRadius: 50,
-    backgroundColor: appsettings.colors.secondary,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginLeft: 10, 
+    width: 60,
+    height: 60,
+    borderRadius: 50,
+    backgroundColor: "#075e54",
+    color: "white",
+    marginLeft: 10,
+    paddingBottom: 5,
+    textAlign: "center",
   },
   texto: {
     fontSize: 16,
     color: appsettings.colors.primary,
-  }
+  },
+  roundedProgressBar: {
+    borderRadius: 8,
+    height: 10,
+  },
 });
 
 export default PetWish;
