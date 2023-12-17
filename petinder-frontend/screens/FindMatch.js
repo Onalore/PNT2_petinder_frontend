@@ -46,25 +46,29 @@ const handleReject = () => {
 };
 
 // Función para guardar la lista de deseos en AsyncStorage
-const saveWishlist = async () => {
+const saveWishlist = async (wishlist) => {
   try {
-    await AsyncStorage.setItem("wishlist", JSON.stringify(mascota));
+    await AsyncStorage.setItem("wishlist", JSON.stringify(wishlist));
   } catch (error) {
     console.error("Error saving wishlist:", error);
   }
 };
 
-// Función para cargar la lista de deseos desde AsyncStorage
 const loadWishlist = async () => {
   try {
     const wishlist = await AsyncStorage.getItem("wishlist");
     if (wishlist !== null) {
-
-      addMascotaDeseada(JSON.parse(wishlist));
+      return JSON.parse(wishlist);
     }
   } catch (error) {
     console.error("Error loading wishlist:", error);
   }
+  return [];
+};
+
+const loadAndAddToWishlist = async () => {
+  const wishlist = await loadWishlist();
+  wishlist.forEach((mascota) => addMascotaDeseada(mascota));
 };
 
   const panResponder = PanResponder.create({

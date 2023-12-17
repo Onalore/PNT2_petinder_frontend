@@ -15,7 +15,11 @@ const WishList = () => {
     setIsEnabled((previousState) => !previousState);
   };
 
-  const mascotasFiltradas = mascotasDeseadas.filter(
+ const mascotasOrdenadas = [...mascotasDeseadas].sort(
+    (mascotaA, mascotaB) => obtenerIndice(mascotaB) - obtenerIndice(mascotaA)
+  );
+
+  const mascotasFiltradas = mascotasOrdenadas.filter(
     (mascota) => obtenerIndice(mascota) >= 85
   );
 
@@ -24,7 +28,7 @@ const WishList = () => {
       <BarraNavegacion icon1="home-outline" icon2="cards-heart-outline" />
 
       <View style={styles.section}>
-        <Text style={styles.text2}>Ver solo matchs</Text>
+        <Text style={styles.text2}>Ver solo matches</Text>
         <Switch
           trackColor={{ false: "#767577", true: appsettings.colors.secondary }}
           thumbColor={"white"}
@@ -36,7 +40,7 @@ const WishList = () => {
       {mascotasDeseadas.length > 0 ? (
         <View style={styles.flatlistContainer}>
           <FlatList
-            data={!isEnabled ? mascotasDeseadas : mascotasFiltradas}
+            data={!isEnabled ? mascotasOrdenadas : mascotasFiltradas}
             renderItem={({ item }) => <PetWish mascota={item} />}
             ItemSeparatorComponent={() => <Divider style={styles.divider} />}
           />
