@@ -2,10 +2,18 @@ import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import appsettings from "../appsettings.json";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Button({ text, onPress }) {
+export default function Button({ text, onPress, color }) {
   const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableOpacity
+      style={[
+        styles.button,
+        {
+          backgroundColor: color ? color : appsettings.colors.primary,
+        },
+      ]}
+      onPress={onPress}
+    >
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );
@@ -21,7 +29,6 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: appsettings.colors.primary,
     height: 70,
     width: "100%",
     color: "#FFFFFF",

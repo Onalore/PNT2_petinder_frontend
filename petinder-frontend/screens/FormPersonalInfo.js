@@ -12,13 +12,12 @@ import Title from "../components/Title";
 import InputCircleBorder from "../components/InputCircleBorder";
 import TextPersonalized from "../components/TextPersonalized";
 import Button from "../components/Button";
+import { app } from "../App";
 import * as Location from "expo-location";
-import { Picker } from "@react-native-picker/picker";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "../firebase.config";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import dayjs from "dayjs";
+import moment from "moment";
 
 const FormPersonalInfo = () => {
   {
@@ -57,8 +56,8 @@ const FormPersonalInfo = () => {
       })();
     }, []);
 
-    const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    console.log("auth ", auth.currentUser);
 
     const handleCreateAccount = () => {
       createUserWithEmailAndPassword(auth, email, password)
@@ -111,6 +110,7 @@ const FormPersonalInfo = () => {
 
     const handleConfirm = (date) => {
       console.warn("A date has been picked: ", date);
+      setFecha(date);
       hideDatePicker();
     };
 
@@ -136,8 +136,7 @@ const FormPersonalInfo = () => {
         <TextPersonalized text="Fecha de Nacimiento" />
         <TouchableOpacity onPress={showDatePicker} style={{ width: "100%" }}>
           <InputCircleBorder
-            placeholder="Fecha de Nacimiento"
-            value={fecha}
+            placeholder={moment(fecha).format("DD/MM/YYYY")}
             editable={false}
           />
         </TouchableOpacity>

@@ -6,6 +6,8 @@ import appsettings from "../appsettings.json";
 import { MascotaContext } from "../App";
 import { obtenerIndice } from "../services/compatibilidad";
 import BarraNavegacion from "../components/BarraNavigation";
+import { getAuth } from "firebase/auth";
+import { app } from "../App";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function FindMatch() {
@@ -13,13 +15,12 @@ export default function FindMatch() {
   const { mascota, addMascotaDeseada } = useContext(MascotaContext);
   const [currentPetIndex, setCurrentPetIndex] = useState(0);
 
-useEffect(() => {
-  loadWishlist(); 
-}, []);
+  const auth = getAuth(app);
+  console.log("auth findMatch", auth);
 
-const handleAccept = () => {
-  addMascotaDeseada(mascota[currentPetIndex]);
-  var indice = obtenerIndice(mascota[currentPetIndex]);
+  const handleAccept = () => {
+    addMascotaDeseada(mascota[currentPetIndex]);
+    var indice = obtenerIndice(mascota[currentPetIndex]);
 
   console.log(indice);
   if (obtenerIndice(mascota[currentPetIndex]) >= 85) {

@@ -3,9 +3,12 @@ import { StyleSheet, Text, View } from "react-native";
 import Navigation from "./Navigation";
 import mascotas from "./services/mascotas";
 import React, { createContext, useEffect, useState } from "react";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "./firebase.config";
 
 // Crear el contexto
 export const MascotaContext = createContext();
+export const app = initializeApp(firebaseConfig);
 
 export default function App() {
   // Estado para la mascota en el contexto
@@ -41,5 +44,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 15,
   },
 });
