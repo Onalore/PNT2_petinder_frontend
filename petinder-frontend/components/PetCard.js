@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   PanResponder,
 } from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import appsettings from "../appsettings.json";
 
 const PetCard = ({
   imagen,
@@ -18,6 +20,8 @@ const PetCard = ({
   onAccept,
   onReject,
   panResponder,
+  mascotaAnterior,
+  currentPetIndex,
 }) => {
   const [isImageLoaded, setImageLoaded] = useState(false);
 
@@ -41,14 +45,32 @@ const PetCard = ({
               {sexo}, {edad} meses
             </Text>
           </View>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.rejectButton} onPress={onReject}>
-            <Text style={styles.buttonText}>Rechazar</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.acceptButton} onPress={onAccept}>
-            <Text style={styles.buttonText}>Aceptar</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonContainer}>
+            {currentPetIndex > 0 ? (
+              <TouchableOpacity
+                style={styles.arrowButtons}
+                onPress={mascotaAnterior}
+              >
+                <Icon
+                  name={"arrow-left"}
+                  size={40}
+                  color={appsettings.colors.primary}
+                />
+              </TouchableOpacity>
+            ) : (
+              <View style={{ width: 70 }}></View>
+            )}
+            <TouchableOpacity style={styles.acceptButton} onPress={onAccept}>
+              <Icon name={"heart-outline"} size={40} color="#B3404A" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.arrowButtons} onPress={onReject}>
+              <Icon
+                name={"arrow-right"}
+                size={40}
+                color={appsettings.colors.primary}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </ImageBackground>
     </View>
@@ -80,6 +102,7 @@ const styles = StyleSheet.create({
   sexo: {
     fontSize: 20,
     color: "#ffffff",
+    marginBottom: "10%",
   },
   nombre: {
     fontSize: 30,
@@ -103,16 +126,22 @@ const styles = StyleSheet.create({
     right: 20,
   },
   acceptButton: {
-    backgroundColor: "green",
-    padding: 10,
-    borderRadius: 5,
-    width: "48%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 70,
+    height: 70,
+    borderRadius: 50,
+    backgroundColor: "#F4B2B0",
   },
-  rejectButton: {
-    backgroundColor: "red",
-    padding: 10,
-    borderRadius: 5,
-    width: "48%",
+  arrowButtons: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 70,
+    height: 70,
+    borderRadius: 50,
+    backgroundColor: appsettings.colors.secondary,
   },
   buttonText: {
     color: "#ffffff",

@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   text: {
     color: "black",
     fontSize: 18,
-    textAlign: "flex-start",
+    textAlign: "left",
     marginTop: "2%",
   },
 });

@@ -6,12 +6,16 @@ import appsettings from "../appsettings.json";
 import { MascotaContext } from "../App";
 import { obtenerIndice } from "../services/compatibilidad";
 import BarraNavegacion from "../components/BarraNavigation";
-import { TouchableOpacity } from "react-native";
+import { getAuth } from "firebase/auth";
+import { app } from "../App";
 
 export default function FindMatch() {
   const navigation = useNavigation();
   const { mascota, addMascotaDeseada } = useContext(MascotaContext);
   const [currentPetIndex, setCurrentPetIndex] = useState(0);
+
+  const auth = getAuth(app);
+  console.log("auth findMatch", auth);
 
   const handleAccept = () => {
     addMascotaDeseada(mascota[currentPetIndex]);
@@ -67,6 +71,8 @@ export default function FindMatch() {
           onAccept={handleAccept}
           onReject={handleReject}
           panResponder={panResponder.panHandlers}
+          mascotaAnterior={volver}
+          currentPetIndex={currentPetIndex}
         />
       ) : (
         <Text style={styles.texto2}>
