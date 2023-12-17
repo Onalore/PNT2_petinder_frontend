@@ -1,5 +1,5 @@
 import PetCard from "../components/PetCard";
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { StyleSheet, View, Text, PanResponder } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import appsettings from "../appsettings.json";
@@ -8,6 +8,7 @@ import { obtenerIndice } from "../services/compatibilidad";
 import BarraNavegacion from "../components/BarraNavigation";
 import { getAuth } from "firebase/auth";
 import { app } from "../App";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function FindMatch() {
   const navigation = useNavigation();
@@ -21,37 +22,65 @@ export default function FindMatch() {
     addMascotaDeseada(mascota[currentPetIndex]);
     var indice = obtenerIndice(mascota[currentPetIndex]);
 
-    console.log(indice);
-    if (obtenerIndice(mascota[currentPetIndex]) >= 85) {
-      navigation.navigate("Match", {
-        matchedPet: mascota[currentPetIndex],
-      });
-    }
-    setCurrentPetIndex(currentPetIndex + 1); // Cambia a la siguiente mascota
-  };
+  console.log(indice);
+  if (obtenerIndice(mascota[currentPetIndex]) >= 85) {
+    navigation.navigate("Match", {
+      matchedPet: mascota[currentPetIndex],
+    });
+  }
+  setCurrentPetIndex(currentPetIndex + 1); 
 
-  const volver = () => {
-    if (currentPetIndex > 0) {
-      setCurrentPetIndex(currentPetIndex - 1); // Vuelve a la mascota anterior
-    }
-  };
+  saveWishlist(); 
+};
 
-  const handleReject = () => {
-    setCurrentPetIndex(currentPetIndex + 1); // Cambia a la siguiente mascota
-  };
+const volver = () => {
+  if (currentPetIndex > 0) {
+    setCurrentPetIndex(currentPetIndex - 1); 
+  }
+};
+
+const handleReject = () => {
+  setCurrentPetIndex(currentPetIndex + 1); 
+
+  saveWishlist(); 
+};
+
+// Función para guardar la lista de deseos en AsyncStorage
+const saveWishlist = async (wishlist) => {
+  try {
+    await AsyncStorage.setItem("wishlist", JSON.stringify(wishlist));
+  } catch (error) {
+    console.error("Error saving wishlist:", error);
+  }
+};
+
+const loadWishlist = async () => {
+  try {
+    const wishlist = await AsyncStorage.getItem("wishlist");
+    if (wishlist !== null) {
+      return JSON.parse(wishlist);
+    }
+  } catch (error) {
+    console.error("Error loading wishlist:", error);
+  }
+  return [];
+};
+
+const loadAndAddToWishlist = async () => {
+  const wishlist = await loadWishlist();
+  wishlist.forEach((mascota) => addMascotaDeseada(mascota));
+};
 
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: (evt, gestureState) => {
       const { dx } = gestureState;
-      return Math.abs(dx) > 5; // Personaliza el umbral de deslizamiento aqu�
+      return Math.abs(dx) > 5; 
     },
     onPanResponderRelease: (evt, gestureState) => {
       const { dx } = gestureState;
       if (dx > 0) {
-        // Deslizar hacia la derecha
         handleAccept();
       } else {
-        // Deslizar hacia la izquierda
         handleReject();
       }
     },
