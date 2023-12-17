@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, ScrollView, Image, Alert } from "react-native";
 import Button from "../components/Button";
 import Title from "../components/Title";
@@ -7,11 +7,12 @@ import appsettings from "../appsettings.json";
 import InputCircleBorder from "../components/InputCircleBorder";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "../App";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigation = useNavigation();
+    const navigation = useNavigation();
 
   const login = () => {
     handleSignIn();
@@ -25,7 +26,8 @@ export default function Login() {
       .then((userCredential) => {
         console.log("Account created!");
         const user = userCredential.user;
-        console.log("Se autenticó a " + user.email);
+          console.log("Se autenticó a " + user.email);
+          AsyncStorage.setItem("sesion", "true");
         navigation.navigate("FindMatch");
       })
       .catch((error) => {
