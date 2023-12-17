@@ -1,52 +1,81 @@
 import PetCard from "../components/PetCard";
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { StyleSheet, View, Text, PanResponder } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import appsettings from "../appsettings.json";
 import { MascotaContext } from "../App";
 import { obtenerIndice } from "../services/compatibilidad";
 import BarraNavegacion from "../components/BarraNavigation";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function FindMatch() {
   const navigation = useNavigation();
   const { mascota, addMascotaDeseada } = useContext(MascotaContext);
   const [currentPetIndex, setCurrentPetIndex] = useState(0);
 
-  const handleAccept = () => {
-    addMascotaDeseada(mascota[currentPetIndex]);
-    var indice = obtenerIndice(mascota[currentPetIndex]);
+useEffect(() => {
+  loadWishlist(); 
+}, []);
 
-    console.log(indice);
-    if (obtenerIndice(mascota[currentPetIndex]) >= 85) {
-      navigation.navigate("Match", {
-        matchedPet: mascota[currentPetIndex],
-      });
+const handleAccept = () => {
+  addMascotaDeseada(mascota[currentPetIndex]);
+  var indice = obtenerIndice(mascota[currentPetIndex]);
+
+  console.log(indice);
+  if (obtenerIndice(mascota[currentPetIndex]) >= 85) {
+    navigation.navigate("Match", {
+      matchedPet: mascota[currentPetIndex],
+    });
+  }
+  setCurrentPetIndex(currentPetIndex + 1); 
+
+  saveWishlist(); 
+};
+
+const volver = () => {
+  if (currentPetIndex > 0) {
+    setCurrentPetIndex(currentPetIndex - 1); 
+  }
+};
+
+const handleReject = () => {
+  setCurrentPetIndex(currentPetIndex + 1); 
+
+  saveWishlist(); 
+};
+
+// Función para guardar la lista de deseos en AsyncStorage
+const saveWishlist = async () => {
+  try {
+    await AsyncStorage.setItem("wishlist", JSON.stringify(mascota));
+  } catch (error) {
+    console.error("Error saving wishlist:", error);
+  }
+};
+
+// Función para cargar la lista de deseos desde AsyncStorage
+const loadWishlist = async () => {
+  try {
+    const wishlist = await AsyncStorage.getItem("wishlist");
+    if (wishlist !== null) {
+
+      addMascotaDeseada(JSON.parse(wishlist));
     }
-    setCurrentPetIndex(currentPetIndex + 1); // Cambia a la siguiente mascota
-  };
-
-  const volver = () => {
-    if (currentPetIndex > 0) {
-      setCurrentPetIndex(currentPetIndex - 1); // Vuelve a la mascota anterior
-    }
-  };
-
-  const handleReject = () => {
-    setCurrentPetIndex(currentPetIndex + 1); // Cambia a la siguiente mascota
-  };
+  } catch (error) {
+    console.error("Error loading wishlist:", error);
+  }
+};
 
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: (evt, gestureState) => {
       const { dx } = gestureState;
-      return Math.abs(dx) > 5; // Personaliza el umbral de deslizamiento aqu�
+      return Math.abs(dx) > 5; 
     },
     onPanResponderRelease: (evt, gestureState) => {
       const { dx } = gestureState;
       if (dx > 0) {
-        // Deslizar hacia la derecha
         handleAccept();
       } else {
-        // Deslizar hacia la izquierda
         handleReject();
       }
     },
