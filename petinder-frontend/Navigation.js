@@ -10,13 +10,18 @@ import SuccessfulRegistration from "./screens/SuccessfulRegistration";
 import FindMatch from "./screens/FindMatch";
 import Match from "./screens/Match";
 import WishList from "./screens/WishList";
+import { getAuth } from "firebase/auth";
+import { app } from "./App";
 
 const HomeStackNavigator = createNativeStackNavigator();
 
 function MyStack() {
+  const auth = getAuth(app);
+  console.log("auth home", auth);
+
   return (
     <HomeStackNavigator.Navigator
-      initialRouteName="Home"
+      initialRouteName={auth.currentUser == undefined ? "Home" : "FindMatch"}
       screenOptions={{
         headerShown: false,
       }}
