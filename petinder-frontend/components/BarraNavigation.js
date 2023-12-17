@@ -1,7 +1,9 @@
 import React from "react";
-import { TouchableOpacity, Image, StyleSheet, View } from "react-native";
+import { TouchableOpacity, Image, StyleSheet, View, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { getAuth, signOut } from "firebase/auth";
+import { app } from "../App";
 
 const BarraNavegacion = ({ icon }) => {
   const navigation = useNavigation();
@@ -12,6 +14,22 @@ const BarraNavegacion = ({ icon }) => {
 
   const handleCorazonPress = () => {
     navigation.navigate("WishList");
+  };
+
+  const auth = getAuth(app);
+  console.log("auth barranavegacion", auth);
+
+  // Función para desloguear al usuario
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth).then(() => {
+        navigation.navigate("Home");
+        console.log("Usuario deslogueado exitosamente");
+      });
+    } catch (error) {
+      console.error("Error al desloguear:", error);
+      Alert.alert(error.message);
+    }
   };
 
   return (
@@ -35,9 +53,17 @@ const BarraNavegacion = ({ icon }) => {
           style={styles.imagen}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleCorazonPress}>
-        <Icon name={icon} size={30} color="green" />
-      </TouchableOpacity>
+      <View style={{ flexDirection: "row" }}>
+        <TouchableOpacity
+          onPress={handleCorazonPress}
+          style={{ paddingRight: 30 }}
+        >
+          <Icon name={icon} size={30} color="green" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleSignOut}>
+          <Icon name={"logout"} size={30} color="green" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
