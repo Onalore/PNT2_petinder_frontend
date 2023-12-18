@@ -45,7 +45,6 @@ const handleReject = () => {
   saveWishlist(); 
 };
 
-// Función para guardar la lista de deseos en AsyncStorage
 const saveWishlist = async (wishlist) => {
   try {
     await AsyncStorage.setItem("wishlist", JSON.stringify(wishlist));

@@ -27,12 +27,12 @@ export default function Login() {
         console.log("Account created!");
         const user = userCredential.user;
           console.log("Se autenticó a " + user.email);
-          AsyncStorage.setItem("sesion", "true");
+          AsyncStorage.setItem("sesion", true);
         navigation.navigate("FindMatch");
       })
       .catch((error) => {
         console.log(error);
-        Alert.alert(error.message);
+        Alert.alert("Datos inválidos");
       });
   };
 

@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "../App";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const BarraNavegacion = ({ icon }) => {
   const navigation = useNavigation();
@@ -24,7 +25,8 @@ const BarraNavegacion = ({ icon }) => {
     try {
       await signOut(auth).then(() => {
         navigation.navigate("Home");
-        console.log("Usuario deslogueado exitosamente");
+          console.log("Usuario deslogueado exitosamente");
+          AsyncStorage.setItem("sesion", false);
       });
     } catch (error) {
       console.error("Error al desloguear:", error);
