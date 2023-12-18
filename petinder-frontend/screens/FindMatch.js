@@ -42,13 +42,13 @@ const volver = () => {
 const handleReject = () => {
   setCurrentPetIndex(currentPetIndex + 1); 
 
-  saveWishlist(); 
+  saveWishlist(mascota); 
 };
 
 // Función para guardar la lista de deseos en AsyncStorage
-const saveWishlist = async (wishlist) => {
+const saveWishlist = async () => {
   try {
-    await AsyncStorage.setItem("wishlist", JSON.stringify(wishlist));
+    await AsyncStorage.setItem("wishlist", JSON.stringify(mascota));
   } catch (error) {
     console.error("Error saving wishlist:", error);
   }
