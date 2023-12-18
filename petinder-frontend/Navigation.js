@@ -21,7 +21,7 @@ function MyStack() {
 
   return (
     <HomeStackNavigator.Navigator
-      initialRouteName={auth.currentUser == undefined ? "Home" : "FindMatch"}
+      initialRouteName={"Home"}
       screenOptions={{
         headerShown: false,
       }}

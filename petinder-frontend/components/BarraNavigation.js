@@ -25,8 +25,8 @@ const BarraNavegacion = ({ icon }) => {
     try {
       await signOut(auth).then(() => {
         navigation.navigate("Home");
-          console.log("Usuario deslogueado exitosamente");
-          AsyncStorage.setItem("sesion", false);
+        console.log("Usuario deslogueado exitosamente");
+        AsyncStorage.setItem("sesion", undefined);
       });
     } catch (error) {
       console.error("Error al desloguear:", error);

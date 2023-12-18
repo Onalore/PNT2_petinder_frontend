@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, ScrollView, Image, Alert } from "react-native";
 import Button from "../components/Button";
 import Title from "../components/Title";
@@ -12,7 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-    const navigation = useNavigation();
+  const navigation = useNavigation();
 
   const login = () => {
     handleSignIn();
@@ -26,8 +26,8 @@ export default function Login() {
       .then((userCredential) => {
         console.log("Account created!");
         const user = userCredential.user;
-          console.log("Se autenticó a " + user.email);
-          AsyncStorage.setItem("sesion", true);
+        console.log("Se autenticó a " + user.email);
+        AsyncStorage.setItem("sesion", user.email);
         navigation.navigate("FindMatch");
       })
       .catch((error) => {

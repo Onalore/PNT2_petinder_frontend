@@ -7,22 +7,22 @@ import CardIconText from "../components/CardIconText";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Home() {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
 
-    useEffect(() => {
-        controlarSesion();
-    }, []);
+  useEffect(() => {
+    controlarSesion();
+  }, []);
 
-    const controlarSesion = async () => {
-        try {
-            const sesion = await AsyncStorage.getItem("sesion");
-            if (sesion) {
-                navigation.navigate("FindMatch");
-            }
-        } catch (error) {
-            console.error("Error al obtener la información de sesión:", error);
-        }
-    };
+  const controlarSesion = async () => {
+    try {
+      const sesion = await AsyncStorage.getItem("sesion");
+      if (sesion !== undefined) {
+        navigation.navigate("FindMatch");
+      }
+    } catch (error) {
+      console.error("Error al obtener la información de sesión:", error);
+    }
+  };
 
   return (
     <View style={styles.container}>
