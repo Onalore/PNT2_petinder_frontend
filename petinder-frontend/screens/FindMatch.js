@@ -18,6 +18,10 @@ export default function FindMatch() {
   const auth = getAuth(app);
   console.log("auth findMatch", auth);
 
+    useEffect(() => {
+      loadAndAddToWishlist();
+    }, []);
+  
   const handleAccept = () => {
     addMascotaDeseada(mascota[currentPetIndex]);
     var indice = obtenerIndice(mascota[currentPetIndex]);
@@ -46,13 +50,13 @@ const handleReject = () => {
 };
 
 // Función para guardar la lista de deseos en AsyncStorage
-const saveWishlist = async () => {
-  try {
-    await AsyncStorage.setItem("wishlist", JSON.stringify(mascota));
-  } catch (error) {
-    console.error("Error saving wishlist:", error);
-  }
-};
+  const saveWishlist = async () => {
+    try {
+      await AsyncStorage.setItem("wishlist", JSON.stringify(mascota));
+    } catch (error) {
+      console.error("Error saving wishlist:", error);
+    }
+  };
 
 const loadWishlist = async () => {
   try {
