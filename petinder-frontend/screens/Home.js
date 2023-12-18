@@ -16,6 +16,7 @@ export default function Home() {
   const controlarSesion = async () => {
     try {
       const sesion = await AsyncStorage.getItem("sesion");
+      console.log("sesion ", sesion);
       if (sesion !== undefined) {
         navigation.navigate("FindMatch");
       }

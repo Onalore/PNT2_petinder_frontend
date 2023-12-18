@@ -18,7 +18,6 @@ const BarraNavegacion = ({ icon }) => {
   };
 
   const auth = getAuth(app);
-  console.log("auth barranavegacion", auth);
 
   // Función para desloguear al usuario
   const handleSignOut = async () => {

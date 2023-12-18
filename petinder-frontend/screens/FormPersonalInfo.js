@@ -57,15 +57,15 @@ const FormPersonalInfo = () => {
     }, []);
 
     const auth = getAuth(app);
-    console.log("auth ", auth.currentUser);
 
     const handleCreateAccount = () => {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          console.log("Signed in !");
+          console.log("Usuario creado !");
           const user = userCredential.user;
           console.log(user);
           handleFormSubmit();
+          submitFormData();
         })
         .catch((error) => {
           console.log(error);
@@ -92,8 +92,6 @@ const FormPersonalInfo = () => {
         longitud,
         telefono,
       };
-
-      submitFormData();
     };
 
     const submitFormData = () => {
