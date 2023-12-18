@@ -18,38 +18,38 @@ export default function FindMatch() {
   const auth = getAuth(app);
   console.log("auth findMatch", auth);
 
-    useEffect(() => {
-      loadAndAddToWishlist();
-    }, []);
-  
+  useEffect(() => {
+    loadAndAddToWishlist();
+  }, []);
+
   const handleAccept = () => {
     addMascotaDeseada(mascota[currentPetIndex]);
     var indice = obtenerIndice(mascota[currentPetIndex]);
 
-  console.log(indice);
-  if (obtenerIndice(mascota[currentPetIndex]) >= 85) {
-    navigation.navigate("Match", {
-      matchedPet: mascota[currentPetIndex],
-    });
-  }
-  setCurrentPetIndex(currentPetIndex + 1); 
+    console.log(indice);
+    if (obtenerIndice(mascota[currentPetIndex]) >= 85) {
+      navigation.navigate("Match", {
+        matchedPet: mascota[currentPetIndex],
+      });
+    }
+    setCurrentPetIndex(currentPetIndex + 1);
 
-  saveWishlist(); 
-};
+    saveWishlist();
+  };
 
-const volver = () => {
-  if (currentPetIndex > 0) {
-    setCurrentPetIndex(currentPetIndex - 1); 
-  }
-};
+  const volver = () => {
+    if (currentPetIndex > 0) {
+      setCurrentPetIndex(currentPetIndex - 1);
+    }
+  };
 
-const handleReject = () => {
-  setCurrentPetIndex(currentPetIndex + 1); 
+  const handleReject = () => {
+    setCurrentPetIndex(currentPetIndex + 1);
 
-  saveWishlist(mascota); 
-};
+    saveWishlist(mascota);
+  };
 
-// Función para guardar la lista de deseos en AsyncStorage
+  // Función para guardar la lista de deseos en AsyncStorage
   const saveWishlist = async () => {
     try {
       await AsyncStorage.setItem("wishlist", JSON.stringify(mascota));
@@ -58,27 +58,27 @@ const handleReject = () => {
     }
   };
 
-const loadWishlist = async () => {
-  try {
-    const wishlist = await AsyncStorage.getItem("wishlist");
-    if (wishlist !== null) {
-      return JSON.parse(wishlist);
+  const loadWishlist = async () => {
+    try {
+      const wishlist = await AsyncStorage.getItem("wishlist");
+      if (wishlist !== null) {
+        return JSON.parse(wishlist);
+      }
+    } catch (error) {
+      console.error("Error loading wishlist:", error);
     }
-  } catch (error) {
-    console.error("Error loading wishlist:", error);
-  }
-  return [];
-};
+    return [];
+  };
 
-const loadAndAddToWishlist = async () => {
-  const wishlist = await loadWishlist();
-  wishlist.forEach((mascota) => addMascotaDeseada(mascota));
-};
+  const loadAndAddToWishlist = async () => {
+    const wishlist = await loadWishlist();
+    wishlist.forEach((mascota) => addMascotaDeseada(mascota));
+  };
 
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: (evt, gestureState) => {
       const { dx } = gestureState;
-      return Math.abs(dx) > 5; 
+      return Math.abs(dx) > 5;
     },
     onPanResponderRelease: (evt, gestureState) => {
       const { dx } = gestureState;
